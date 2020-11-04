@@ -29,6 +29,31 @@
             <a [routerLink]="['planning']" class="nav-link text-uppercase font-weight-bold">Planning</a>
           </li>
 
+          <li class="nav-item" routerLink="events" routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact:true}">
+            <a [routerLink]="['events']" class="nav-link text-uppercase font-weight-bold">Events</a>
+          </li>
+
+          <!-- Auth Routes -->
+          <ul *ngIf="!authService.loggedIn(); else AuthUserBlock">
+            <li class="nav-item pb-1 ml-3" routerLink="login" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+              <a [routerLink]="['login']" class="btn btn-outline-primary nav-link text-uppercase font-weight-bold">Login</a>
+            </li>
+
+            <li class="nav-item" routerLink="register" routerLinkActive="active"
+                [routerLinkActiveOptions]="{exact:true}">
+              <a type="button" [routerLink]="['register']" class="btn btn-outline-primary nav-link text-uppercase font-weight-bold">Register</a>
+            </li>
+          </ul>
+
+          <ng-template #AuthUserBlock>
+            <li class="nav-item">
+              <a type="button" *ngIf="authService.loggedIn()" (click)="authService.logoutUser()" class="ml-3 btn btn-outline-primary nav-link text-uppercase font-weight-bold">Logout</a>
+            </li>
+          </ng-template>
+          <!-- Auth Routes end -->
+
         </ul>
       </div>
     </div>
